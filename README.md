@@ -5,7 +5,7 @@ article. The app also allows you to save each article, add notes to that article
 built using [MongoDB](https://www.mongodb.com/), [Node.js](https://nodejs.org/en/), [Cheerio](https://www.npmjs.com/package/cheerio), [Express](https://expressjs.com/), 
 [Handlebars](https://www.npmjs.com/package/express-handlebars), and several NPM packages. 
 
-Click [here](https://news---scraper.herokuapp.com/) to view the application!
+Click [here](https://news---scraper.herokuapp.com/) to view the application! (Still fixing some bugs :))
 
 
 ## Installation 
