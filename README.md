@@ -1,4 +1,4 @@
-# NEWS - SCRAPER
+# NEWS SCRAPER
 
 News Scraper allows the user to scrape the latest articles from the Charlotte Observer which displays a headline and a direct link to the actual 
 article. The app also allows you to save each article, add notes to that article, delete notes, and dellete saved articles. The application was
@@ -20,7 +20,7 @@ Example: `var PORT = process.env.PORT || 3000`
 
 ## Built With
 * [MongoDB](https://www.mongodb.com/)
-* [Node.js](https://nodejs.org/en/docs/)* 
+* [Node.js](https://nodejs.org/en/docs/)
 * JavaScript
 * [jQuery](https://jquery.com/)
 * HTML5
