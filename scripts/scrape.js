@@ -1,29 +1,35 @@
+// Require Axios and Cheerio
 var cheerio = require("cheerio");
 var axios = require("axios");
-var request = require("request")
-
 
 var scrape = function (callback){
-    request("https://www.nytimes.com", function(error, res, body){
-        var $ = cheerio.load(body);
+    // Use Axios to pull from the Charlotte Observer website
+    axios.get("https://www.charlotteobserver.com/").then(function(response) {
+        //Set variable to hold Cheerio data
+        var $ = cheerio.load(response.data);
+        console.log("Scraping check 1....");
         var articles = [];
-        $(".theme-summary").each(function(i, element){
-            console.log("test grab")
-            var head = $(this).children(".story-heading").text().trim();
-            var sum = $(this).children(".summary").text().trim()
-            console.log(head)
-            console.log(sum)
-        if(head && link){
-            var headNeat = head.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim()
-            var linkNeat = sum.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim()
-            var dataToAdd = {
-                headline: headNeat,
-                summary: linkNeat
-            }
-            articles.push(dataToAdd);
+        // Find article html tags and classes for each article on the website
+        $("article").each(function(i, element){
+            console.log("Scraping check 2....");
+            var headstart = $(this).children("div.package");       
+            var headstart1 = headstart.children("h3");
+            var linkstart = headstart1.children("a").attr("href");
+            var head = headstart1.children("a").text();
+                // If the article is found using above variables, trim and add to a variable
+                if(head && linkstart){
+                    var header = head.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
+                    var link = linkstart.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
+                    var dataToAdd = {
+                        headline: header,
+                        summary: link
+                }
+                // Push into an array
+                articles.push(dataToAdd);
         }
     })
     callback(articles)
-})
+}) 
 }
+//Export scrape function 
 module.exports = scrape

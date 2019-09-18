@@ -8,13 +8,14 @@ var bodyParser = require("body-parser");
 var app = express();
 var router = express.Router();
 
-// Set Port
-var PORT = process.env.PORT || 3000;
-
 app.use(express.static(__dirname + "/public"));
 app.use(router);
 
-require("./config/routes")(router);
+// Set Port
+var PORT = process.env.PORT || 3000;
+
+// Require routes
+require("./config/routes.js")(router);
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var db = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
@@ -23,14 +24,6 @@ var db = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 mongoose.connect(db, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-});
-
-mongoose.connect(db, function(error){
-    if(error){
-        console.log(error)
-    } else {
-        console.log("Mongoose connection Successful!");
-    }
 });
 
 // Insert code from Body-Parser npm page 
@@ -42,12 +35,6 @@ app.use(bodyParser.raw({ type: "application/vnd.custom-type" }));
 // Insert code for handlebars
 app.engine("handlebars", expressHandlebars({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-
-
-
-
-
-
 
 // Listen to Port being used, confirm working server
 app.listen(PORT, function(){

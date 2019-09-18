@@ -32,7 +32,7 @@ function createPanel(article){
         "<div class='panel-heading'>",
         "<h3>",
         article.headline,
-        "<a class='btn btn-success save'>",
+        "<a class='btn btn-primary save' id='saveBtn'>",
         "Save Article",
         "</a>",
         "</h3>",
@@ -67,10 +67,9 @@ articleContainer.append(emptyAlert)
 function handleArticleSave (){
     var articleToSave = $(this).parents(".panel").data();
     articleToSave.saved = true
-
     $.ajax({
         method: "PATCH",
-        url: "/app/headlines",
+        url: "/api/headlines",
         data: articleToSave
     }).then (function(data){
         if (data.ok){

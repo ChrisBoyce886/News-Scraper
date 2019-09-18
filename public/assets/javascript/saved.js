@@ -1,22 +1,40 @@
 $(document).ready(function(){
-
+    // Creat variable to hold all articles
     var articleContainer = $(".article-container");
     $(document).on("click", ".btn.delete", handleArticleDelete);
     $(document).on("click", ".btn.notes", handleArticleNotes);
     $(document).on("click", ".btn.save", handleNoteSave);
     $(document).on("click", "btn.note-delete", handleNoteDelete);
-
+    // Run initpage function
     initPage()
-
+    //Empty article container, run AJAX request for unsaved headlines
     function initPage(){
         articleContainer.empty();
         $.get("/api/headlines?saved=true").then(function(data){
+            // if headlines are found, render to page or alert otherwise
             if (data && data.length){
                 renderArticles(data);
             } else {
                 renderEmpty();
             }
         })
+    };
+
+    function renderEmpty(){
+        var emptyAlert = $([
+            "div class='alert alert-warning text-center'>",
+            "<h4>Looks like we don't have any saved Articles</h4>",
+            "</div>",
+            "<div class='panel panel-default'>",
+            "<div class='panel-heading text-center'>",
+            "<h3>Would you like to browse available articles?</h3>",
+            "</div>",
+            "<div class='panel-body text-center'>",
+            "<h4><a href='/'>Browse Articles</a></h4>",
+            "</div>",
+            "</div>"
+        ].join(""));
+        articleContainer.append(emptyAlert);
     };
 
     function renderArticles(articles){
@@ -26,7 +44,7 @@ $(document).ready(function(){
         }
         articleContainer.append(articlePanels);
     };
-
+    // Take in JSON object for an article, create element for html
     function createPanel(article){
         var panel = $([
             "<div class='panel panel-default'>",
@@ -46,26 +64,7 @@ $(document).ready(function(){
     ].join(""))
     panel.data("_id", article._id);
     return panel;
-}
-
-
-
-    function renderEmpty(){
-        var emptyAlert = $([
-            "div class='alert alert-warning text-center'>",
-            "<h4>Looks like we don't have any saved Articles</h4>",
-            "</div>",
-            "<div class='panel panel-default'>",
-            "<div class='panel-heading text-center'>",
-            "<h3>Would you like to browse available articles?</h3>",
-            "</div>",
-            "<div class='panel-body text-center'>",
-            "<h4><a href='/'>Browse Articles</a></h4>",
-            "</div>",
-            "</div>"
-        ].join(""));
-        articleContainer.append(emptyAlert);
-    }
+    };
 
     function renderNotesList(data){
         var NotesToRender = []
@@ -90,7 +89,7 @@ $(document).ready(function(){
             }
         }
         $(".note-container").append(notesToRender)
-    }
+    };
 
     function handleArticleDelete(){
         var articleToDelete = $(this).parents(".panel").data()
@@ -103,7 +102,7 @@ $(document).ready(function(){
                 initPage()
             }
         })
-    }
+    };
 
     function handleArticleNotes(){
         var currentArticle = $(this).parents(".panel").data();
@@ -132,7 +131,7 @@ $(document).ready(function(){
 
             renderNotesList(noteData)            
         })
-    }
+    };
 
     function handleNoteSave(){
         var noteData
@@ -159,6 +158,4 @@ $(document).ready(function(){
             bootbox.hideAll();
         })
     }
-
-
 })
