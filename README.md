@@ -35,3 +35,5 @@ Example: `var PORT = process.env.PORT || 3000`
 * [Bootbox](https://www.npmjs.com/package/bootbox)
 * [Axios](https://www.npmjs.com/package/axios)
 * [Cheerio](https://www.npmjs.com/package/cheerio)
+
+![home-page-screenshot](public/assets/images/screenshot.PNG "home-page-screenshot")
