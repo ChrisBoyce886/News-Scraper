@@ -1,6 +1,6 @@
 // Require scripts
-var Note = require("../models/Note");
-var makeDate = require("../scripts/date");
+var Note = require("../models/note");
+var correctDate = require("../scripts/date");
 
 module.exports = {
     // Find all notes associated with headline id
@@ -12,7 +12,7 @@ module.exports = {
     save: function(data, callback){
         var newNote = {
             _headlineId: data._id,
-            date: makeDate(),
+            date: correctDate(),
             noteText: data.noteText
         };
         // Take note and create a new note

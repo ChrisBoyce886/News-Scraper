@@ -1,6 +1,6 @@
 // Require necessary js scripts
 var scrape = require("../scripts/scrape.js");
-var makeDate = require("../scripts/date.js");
+var correctDate = require("../scripts/date.js");
 var Headline = require("../models/headline.js");
 
 module.exports = {
@@ -8,9 +8,9 @@ module.exports = {
     fetch: function (callback){
         scrape(function(data){
             var articles = data;
-            // Loop through all articles set save to false for all of them and run makeDate function
+            // Loop through all articles set save to false for all of them and run correctDate function
             for (i = 0; i < articles.length; i++){
-                articles[i].date = makeDate();
+                articles[i].date = correctDate();
                 articles[i].saved = false;
             }
             // Mongo function for all articles

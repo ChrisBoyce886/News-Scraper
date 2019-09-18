@@ -18,7 +18,7 @@ module.exports = function(router){
             // Display message to the user how many articles were scraped or that none were scraped
             if(!docs || docs.insertedCount === 0){
                 res.json({
-                    message: "No new articles today. Check back tomorrow!"
+                    message: "No new articles right now. Please check back a bit later"
                 })
             } else {
                 res.json ({
@@ -40,7 +40,7 @@ module.exports = function(router){
     // Set query to request params id, pass into delete function, respond with the data
     router.delete("/api/headlines/:id", function(req, res){
         var query = {}
-        query._id = req.params._id;
+        query._id = req.params.id;
         headlinesController.delete(query, function(error, data){
             res.json(data)
         });

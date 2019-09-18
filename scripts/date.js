@@ -1,11 +1,11 @@
-// Short Function to correct date fo articles 
-function makeDate (){
-    var d = new Date();
-    var formattedDate = "";
-    formattedDate += (d.getMonth() + 1) + "_";
-    formattedDate += d.getDate() + "_";
-    formattedDate += d.getFullYear();
-    return formattedDate;
+// Short Function to correct date of articles 
+function correctDate (){
+    var olddate = new Date();
+    var newdate = "";
+    newdate += (olddate.getMonth() + 1) + "_";
+    newdate += olddate.getDate() + "_";
+    newdate += olddate.getFullYear();
+    return newdate;
 };
-// Export makeDate function
-module.exports = makeDate
+// Export correct date function
+module.exports = correctDate
